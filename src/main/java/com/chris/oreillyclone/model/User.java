@@ -1,4 +1,4 @@
-package com.chris.model;
+package com.chris.oreillyclone.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -33,7 +33,6 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Address> addressList = new ArrayList<>();
 
-    @Embedded
     @ElementCollection
     @CollectionTable(name = "payment_information", joinColumns = @JoinColumn(name = "user_id"))
     private List<PaymentInformation> paymentInformationList = new ArrayList<>();
@@ -46,5 +45,4 @@ public class User {
     private List<Review> reviewList = new ArrayList<>();
 
     private LocalDateTime createdAt;
-
 }

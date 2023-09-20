@@ -1,4 +1,4 @@
-package com.chris.model;
+package com.chris.oreillyclone.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

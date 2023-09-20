@@ -1,13 +1,14 @@
-package com.chris.model;
+package com.chris.oreillyclone.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-
 @Getter
 @Setter
+@Embeddable
 public class PaymentInformation {
     @Column(name="cardholder_name")
     private String cardholderName;

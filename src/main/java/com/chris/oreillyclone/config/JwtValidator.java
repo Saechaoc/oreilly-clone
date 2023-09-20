@@ -1,4 +1,4 @@
-package com.chris.config;
+package com.chris.oreillyclone.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

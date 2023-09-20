@@ -1,4 +1,4 @@
-package com.chris.model;
+package com.chris.oreillyclone.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

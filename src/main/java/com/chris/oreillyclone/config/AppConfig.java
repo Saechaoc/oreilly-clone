@@ -1,10 +1,12 @@
-package com.chris.config;
+package com.chris.oreillyclone.config;
 
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,7 +22,20 @@ import java.util.Collections;
 import java.util.List;
 
 @Configuration
-public class AppConfig {
+public class AppConfig{
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception{
+//        http.authorizeHttpRequests((authorize) -> authorize
+//                        .anyRequest()
+//                        .authenticated()
+//                        .requestMatchers("/","index", "/api/**","/css/*","/auth/signup")
+//                        .permitAll()
+//                        .anyRequest().permitAll()
+//                )
+//                .httpBasic(Customizer.withDefaults());
+//    }
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -28,7 +43,9 @@ public class AppConfig {
                                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                         )
                 .authorizeHttpRequests((authorize)->
-                        authorize.requestMatchers("/api/**").authenticated().anyRequest().permitAll()
+                        authorize.requestMatchers("/api/**").authenticated()
+                                .requestMatchers("/auth/signup","/","index").permitAll()
+                                .anyRequest().permitAll()
                 )
                 .addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)

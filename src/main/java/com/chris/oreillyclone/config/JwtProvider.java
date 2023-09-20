@@ -1,4 +1,4 @@
-package com.chris.config;
+package com.chris.oreillyclone.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -30,6 +30,7 @@ public class JwtProvider {
             jwt = jwt.substring(7);
         }
 
+        //This kind of feels like I'm just swallowing the exception.. There is probably a better way to do this
         try {
             Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
             return (String) claims.get("email");

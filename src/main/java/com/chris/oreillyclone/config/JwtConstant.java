@@ -1,4 +1,4 @@
-package com.chris.config;
+package com.chris.oreillyclone.config;
 
 public class JwtConstant {
     public static final String SECRET_KEY = "alskdjfalskjdbnnpoaiwneouhzlkjpoiujowhoe";
