@@ -10,7 +10,7 @@ import java.util.List;
 public interface ProductService {
     public Product createProduct(CreateProductRequest createProductRequest);
 
-    public String deleteProdcut(Long pid) throws ProductException;
+    public String deleteProduct(Long pid) throws ProductException;
 
     public Product updateProduct(Long pid, Product product) throws ProductException;
 
@@ -18,5 +18,5 @@ public interface ProductService {
 
     public List<Product> findProductByCategory(String category);
 
-    public Page<Product> getAllProducts(String category, String subcategory, Integer minPrice, Integer maxPrice, String sort, String stock, Integer pageNumber, Integer pageSize);
+    public Page<Product> getAllProducts(String category, String subcategory, double minPrice, double maxPrice, String sort, String stock, Integer pageNumber, Integer pageSize);
 }

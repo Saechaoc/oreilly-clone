@@ -2,7 +2,6 @@ package com.chris.oreillyclone.service;
 
 import com.chris.oreillyclone.exception.ProductException;
 import com.chris.oreillyclone.model.Product;
-import com.chris.oreillyclone.model.User;
 import com.chris.oreillyclone.repository.CategoryRepository;
 import com.chris.oreillyclone.repository.ProductRepository;
 import com.chris.oreillyclone.request.CreateProductRequest;
@@ -29,7 +28,7 @@ public class ProductServiceImplementation implements ProductService{
     }
 
     @Override
-    public String deleteProdcut(Long pid) throws ProductException {
+    public String deleteProduct(Long pid) throws ProductException {
         return null;
     }
 
@@ -49,7 +48,7 @@ public class ProductServiceImplementation implements ProductService{
     }
 
     @Override
-    public Page<Product> getAllProducts(String category, String subcategory, Integer minPrice, Integer maxPrice, String sort, String stock, Integer pageNumber, Integer pageSize) {
+    public Page<Product> getAllProducts(String category, String subcategory, double minPrice, double maxPrice, String sort, String stock, Integer pageNumber, Integer pageSize) {
         return null;
     }
 }
