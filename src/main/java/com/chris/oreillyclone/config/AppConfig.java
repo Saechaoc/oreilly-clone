@@ -22,19 +22,8 @@ import java.util.Collections;
 import java.util.List;
 
 @Configuration
-public class AppConfig{
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception{
-//        http.authorizeHttpRequests((authorize) -> authorize
-//                        .anyRequest()
-//                        .authenticated()
-//                        .requestMatchers("/","index", "/api/**","/css/*","/auth/signup")
-//                        .permitAll()
-//                        .anyRequest().permitAll()
-//                )
-//                .httpBasic(Customizer.withDefaults());
-//    }
-
+@EnableWebSecurity
+public class AppConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

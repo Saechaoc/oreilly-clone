@@ -45,7 +45,7 @@ public class Product {
 
     @ManyToOne()
     @JoinColumn(name="category_id")
-    private Category cateogry;
+    private Category category;
 
 //    @ManyToOne()
 //    @JoinColumn(name="subcategory_id")
@@ -67,7 +67,7 @@ public class Product {
         this.imageUrl = imageUrl;
         this.ratingList = ratingList;
         this.numRatings = numRatings;
-        this.cateogry = cateogry;
+        this.category = cateogry;
         this.createdAt = createdAt;
     }
 }
