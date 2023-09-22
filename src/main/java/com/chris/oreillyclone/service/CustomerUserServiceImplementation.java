@@ -2,13 +2,11 @@ package com.chris.oreillyclone.service;
 
 import com.chris.oreillyclone.model.User;
 import com.chris.oreillyclone.repository.UserRepository;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +21,9 @@ public class CustomerUserServiceImplementation implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username);
+        User user = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Username not found with email: " + username));
 
-        if (user == null) throw new UsernameNotFoundException("Username not found with email: " + username);
-
-       List<GrantedAuthority> authorities = new ArrayList<>();
-       return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),authorities);
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
 }

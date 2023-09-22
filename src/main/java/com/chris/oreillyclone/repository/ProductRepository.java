@@ -14,7 +14,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     //Find Methods
     @Query("SELECT P FROM Product P WHERE P.id = ?1")
-    Optional<Product> findProductById(String id);
+    Optional<Product> findProductById(Long id);
 
     @Query("SELECT P FROM Product P WHERE P.title = ?1")
     List<Product> findByTitle(String title);
@@ -25,7 +25,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT P FROM Product P WHERE (P.category.name = :category OR :category = '') AND (:minPrice IS NULL OR P.price >= :minPrice) AND (:maxPrice IS NULL OR P.price <= :maxPrice) ORDER BY CASE WHEN :sort = 'price_low' THEN P.price ELSE 0 END, CASE WHEN :sort = 'price_high' THEN P.price ELSE 1 END DESC")
     List<Product> filterProduct(@Param("category") String category, @Param("minPrice") double minPrice, @Param("maxPrice") double maxPrice, @Param("sort") String sort);
 
-    @Query("SELECT P FROM Product P where p.price between ?1 and ?2")
+    @Query("SELECT P FROM Product P where P.price between ?1 and ?2")
     List<Product> findProductsByPriceRange(double minPrice, double maxPrice);
 
     @Query(value = "SELECT * FROM products WHERE price > ?1", nativeQuery = true)

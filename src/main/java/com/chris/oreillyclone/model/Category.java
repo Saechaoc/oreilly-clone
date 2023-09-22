@@ -3,9 +3,13 @@ package com.chris.oreillyclone.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "categories")
+@Setter
+@Getter
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

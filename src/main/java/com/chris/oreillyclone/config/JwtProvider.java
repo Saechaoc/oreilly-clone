@@ -25,18 +25,14 @@ public class JwtProvider {
                 .compact();
     }
 
-    public String getEmailFromToken(String jwt) throws Exception{
+    //How should I handle missing tokens? Possibly create two exceptions since this is connected to user, UserException & InvalidTokenException
+    public String getEmailFromToken(String jwt) {
         if (jwt.startsWith("Bearer ")) {
             jwt = jwt.substring(7);
         }
 
-        //This kind of feels like I'm just swallowing the exception.. There is probably a better way to do this
-        try {
-            Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
-            return (String) claims.get("email");
-        } catch (Exception e) {
-            throw new Exception("Invalid JWT token", e);
-        }
+        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
+        return (String) claims.get("email");
     }
 
 

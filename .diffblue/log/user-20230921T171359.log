@@ -1,0 +1,23 @@
+17:14:00.416 [INFO]  [Preparing] Diffblue Cover 2023.09.01-9200f07-licensed
+17:14:00.417 [INFO]  [Preparing] 
+17:14:00.418 [INFO]  [Preparing] Running: dcover create
+17:14:07.446 [INFO]  [Checking] Detecting environment:
+17:14:07.447 [INFO]  [Checking] ----------------------
+17:14:07.524 [INFO]  [Checking] Detected Java version 20.0.2
+17:14:07.532 [INFO]  [Checking] Operating System: Windows 10 amd64 10.0
+17:14:07.533 [INFO]  [Checking] Default charset: UTF-8
+17:14:07.533 [INFO]  [Checking] Default locale: en_US
+17:14:07.533 [INFO]  [Checking] Default time zone: America/Los_Angeles
+17:14:07.538 [INFO]  [Checking] Detected JVM architecture: 64-Bit
+17:14:07.543 [INFO]  [Checking] Selected test output directory: C:\Users\chris\IdeaProjects\oreilly-clone\src\test\java
+17:14:07.554 [ERROR] [Checking] E047: Unsupported Java version
+Version 20.0.2 of Java is not supported.
+Please use Java 8 Update 351+, Java 11.0.17+ or Java 17.0.5+.
+17:14:07.560 [INFO]  [Reporting] 
+17:14:07.560 [INFO]  [Reporting] Environment summary:
+17:14:07.560 [INFO]  [Reporting] --------------------
+17:14:07.564 [ERROR] [Reporting] Java version                  20.0.2                        UNSUPPORTED    
+17:14:07.564 [INFO]  [Reporting] 
+17:14:07.565 [ERROR] [Reporting] Environment check status: ERROR
+17:14:07.566 [INFO]  [Checking] Log file: C:\Users\chris\IdeaProjects\oreilly-clone\.diffblue\log\user-20230921T171359.log
+17:14:07.567 [INFO]  [Reporting] Finished in 6s

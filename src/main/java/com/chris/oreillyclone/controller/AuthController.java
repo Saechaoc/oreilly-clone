@@ -9,9 +9,7 @@ import com.chris.oreillyclone.response.AuthResponse;
 import com.chris.oreillyclone.service.CustomerUserServiceImplementation;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,7 +18,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,9 +51,8 @@ public class AuthController {
         String firstName = user.getFirstName();
         String lastName = user.getLastName();
 
-        User emailExists = userRepository.findByEmail(email);
-
-        if(emailExists != null) throw new UserException("Email is already used with another account");
+        userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserException("Email is already used with another account"));
 
         User createdUser = new User();
         createdUser.setEmail(email);
@@ -67,7 +67,7 @@ public class AuthController {
         String token = jwtProvider.generateToken(authentication);
 
         AuthResponse authResponse = new AuthResponse(token, "Sign up success");
-        return new ResponseEntity<AuthResponse>(authResponse,HttpStatus.CREATED);
+        return new ResponseEntity<>(authResponse, HttpStatus.CREATED);
     }
 
     @PostMapping("/signin")

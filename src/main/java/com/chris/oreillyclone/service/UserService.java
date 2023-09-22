@@ -9,4 +9,6 @@ public interface UserService {
 
     User findUserByJWT(String jwt) throws UserException;
 
+    User findUserByEmail(String email) throws UserException;
+
 }

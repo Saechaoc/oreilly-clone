@@ -1,0 +1,31 @@
+17:14:00.402 [DEBUG] [Preparing][main][c.d.cover.ui.a.u] Client heap size: 10224 MB
+17:14:00.416 [INFO]  [Preparing][main][c.d.cover.ui.a.u] Diffblue Cover 2023.09.01-9200f07-licensed
+17:14:00.417 [INFO]  [Preparing][main][c.d.cover.ui.a.u] 
+17:14:00.418 [INFO]  [Preparing][main][c.d.cover.ui.a.u] Running: dcover create
+17:14:03.969 [DEBUG] [Checking][main][c.l.i.s.LicenseService] [LicenseClientAPI#checkLicense] ---> GET https://api.licensespring.com/api/v4/check_license?is_vm=false&product=cover&sdk_ver=Java%20SDK%20null&hardware_id=DBF1-B8B1-B916-5865-4EC6-3CB4-7EC4-7B4B-4348-BEB5-424B-6FC8-1095-B360-6620-28F2&license_key=XXXX-XXXX-XXXX-XXXX HTTP/1.1
+17:14:04.733 [DEBUG] [Checking][main][c.l.i.s.LicenseService] [LicenseClientAPI#checkLicense] <--- UNKNOWN 200  (763ms)
+17:14:05.491 [DEBUG] [Checking][main][c.l.i.s.LicenseService] [LicenseClientAPI#checkLicense] ---> GET https://api.licensespring.com/api/v4/check_license?is_vm=false&product=cover&sdk_ver=Java%20SDK%20null&hardware_id=DBF1-B8B1-B916-5865-4EC6-3CB4-7EC4-7B4B-4348-BEB5-424B-6FC8-1095-B360-6620-28F2&license_key=XXXX-XXXX-XXXX-XXXX HTTP/1.1
+17:14:05.708 [DEBUG] [Checking][main][c.l.i.s.LicenseService] [LicenseClientAPI#checkLicense] <--- UNKNOWN 200  (216ms)
+17:14:07.098 [DEBUG] [Checking][main][c.l.i.s.LicenseService] [LicenseClientAPI#checkLicense] ---> GET https://api.licensespring.com/api/v4/check_license?is_vm=false&product=cover&sdk_ver=Java%20SDK%20null&hardware_id=DBF1-B8B1-B916-5865-4EC6-3CB4-7EC4-7B4B-4348-BEB5-424B-6FC8-1095-B360-6620-28F2&license_key=XXXX-XXXX-XXXX-XXXX HTTP/1.1
+17:14:07.317 [DEBUG] [Checking][main][c.l.i.s.LicenseService] [LicenseClientAPI#checkLicense] <--- UNKNOWN 200  (219ms)
+17:14:07.446 [INFO]  [Checking][main][c.d.cover.ui.a.j] Detecting environment:
+17:14:07.447 [INFO]  [Checking][main][c.d.cover.ui.a.j] ----------------------
+17:14:07.524 [INFO]  [Checking][main][c.d.cover.ui.a.j] Detected Java version 20.0.2
+17:14:07.532 [INFO]  [Checking][main][c.d.cover.n.a.ai] Operating System: Windows 10 amd64 10.0
+17:14:07.533 [INFO]  [Checking][main][c.d.cover.n.a.ai] Default charset: UTF-8
+17:14:07.533 [INFO]  [Checking][main][c.d.cover.n.a.ai] Default locale: en_US
+17:14:07.533 [INFO]  [Checking][main][c.d.cover.n.a.ai] Default time zone: America/Los_Angeles
+17:14:07.538 [INFO]  [Checking][main][c.d.cover.ui.a.j] Detected JVM architecture: 64-Bit
+17:14:07.543 [INFO]  [Checking][main][c.d.cover.ui.a.j] Selected test output directory: C:\Users\chris\IdeaProjects\oreilly-clone\src\test\java
+17:14:07.554 [ERROR] [Checking][main][c.d.cover.ui.a.j] E047: Unsupported Java version
+Version 20.0.2 of Java is not supported.
+Please use Java 8 Update 351+, Java 11.0.17+ or Java 17.0.5+.
+17:14:07.560 [INFO]  [Reporting][main][c.d.cover.ui.a.j] 
+17:14:07.560 [INFO]  [Reporting][main][c.d.cover.ui.a.j] Environment summary:
+17:14:07.560 [INFO]  [Reporting][main][c.d.cover.ui.a.j] --------------------
+17:14:07.564 [ERROR] [Reporting][main][c.d.cover.ui.a.j] Java version                  20.0.2                        UNSUPPORTED    
+17:14:07.564 [INFO]  [Reporting][main][c.d.cover.ui.a.j] 
+17:14:07.565 [ERROR] [Reporting][main][c.d.cover.ui.a.j] Environment check status: ERROR
+17:14:07.565 [DEBUG] [Checking][main][c.d.cover.ui.a.j] Inference engine couldn't determine build system, unable to attempt refactoring
+17:14:07.566 [INFO]  [Checking][main][c.d.cover.ui.a.b] Log file: C:\Users\chris\IdeaProjects\oreilly-clone\.diffblue\log\user-20230921T171359.log
+17:14:07.567 [INFO]  [Reporting][main][c.d.cover.ui.a.u] Finished in 6s
