@@ -1,5 +1,0 @@
-[ERROR] E047: Unsupported Java version
-Version 20.0.2 of Java is not supported.
-Please use Java 8 Update 351+, Java 11.0.17+ or Java 17.0.5+.
-[ERROR] Java version                  20.0.2                        UNSUPPORTED    
-[ERROR] Environment check status: ERROR
