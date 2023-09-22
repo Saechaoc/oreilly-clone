@@ -35,3 +35,10 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Ignore all .log files
+*.log
+
+# Ignore the directory named "temp"
+temp/
+.diffblue/
