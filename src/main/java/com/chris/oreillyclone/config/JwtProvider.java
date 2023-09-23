@@ -14,7 +14,7 @@ public class JwtProvider {
     SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
 
     public String generateToken(Authentication authentication) {
-        long expirationTimeMillis = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+        long expirationTimeMillis = 24 * 60 * 60 * 1000L; // 24 hours in milliseconds
         Date now = new Date();
 
         return Jwts.builder()

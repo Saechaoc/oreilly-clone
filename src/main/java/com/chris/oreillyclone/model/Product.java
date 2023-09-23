@@ -1,7 +1,9 @@
 package com.chris.oreillyclone.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -11,6 +13,8 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
 
     @Id
@@ -55,22 +59,4 @@ public class Product {
 //    private Subcategory subcateogry;
 
     private LocalDateTime createdAt;
-
-    public Product() {}
-
-    public Product(Long id, String title, String description, double price, String productLine,
-                   String productFamily, String imageUrl, List<Rating> ratingList, int numRatings,
-                   Category cateogry, LocalDateTime createdAt) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.productLine = productLine;
-        this.productFamily = productFamily;
-        this.imageUrl = imageUrl;
-        this.ratingList = ratingList;
-        this.numRatings = numRatings;
-        this.category = cateogry;
-        this.createdAt = createdAt;
-    }
 }

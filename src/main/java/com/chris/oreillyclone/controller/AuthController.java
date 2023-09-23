@@ -51,8 +51,9 @@ public class AuthController {
         String firstName = user.getFirstName();
         String lastName = user.getLastName();
 
-        userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserException("Email is already used with another account"));
+        if (userRepository.findByEmail(email).isEmpty()) {
+            throw new UserException("Email is already used with another account");
+        }
 
         User createdUser = new User();
         createdUser.setEmail(email);
@@ -81,7 +82,7 @@ public class AuthController {
         String token = jwtProvider.generateToken(authentication);
 
         AuthResponse authResponse = new AuthResponse(token, "Sign in success");
-        return new ResponseEntity<AuthResponse>(authResponse,HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(authResponse,HttpStatus.ACCEPTED);
     }
 
     private Authentication authenticate(String username, String password) {

@@ -26,8 +26,21 @@ public class Cart {
     @Column(name = "total_price")
     private double totalPrice;
 
+    /**
+     *   The cart doesn't own the information about cartitems
+     *      CartItems should be the single source of truth
+     */
     @Column(name = "total_items")
     private int totalItems;
 
+    public void calculateTotalItems() {setTotalItems(cartItems.size());}
+
+    public void calculateTotalPrice() {
+        double sumPrice = 0;
+        for(CartItem cartItem : this.cartItems) {
+            sumPrice += cartItem.getPrice() * cartItem.getQuantity();
+        }
+        setTotalPrice(sumPrice);
+    }
 
 }

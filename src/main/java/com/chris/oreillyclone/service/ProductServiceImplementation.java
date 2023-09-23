@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImplementation implements ProductService {
@@ -56,12 +55,7 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     /**
-     * Helper Method for createProduct
-     *
-     * @param categoryName
-     * @param parent
-     * @param level
-     * @return
+     * Helper Method for createProduct\
      * @see #createProduct(CreateProductRequest)
      */
     private Category findOrCreateCategory(String categoryName, Category parent, int level) {
@@ -130,11 +124,11 @@ public class ProductServiceImplementation implements ProductService {
         if("in_stock".equals(stock)) {
             products = products.stream()
                     .filter(p -> p.getQuantity() > 0)
-                    .collect(Collectors.toList());
+                    .toList();
         }else if("out_of_stock".equals(stock)) {
             products = products.stream()
                     .filter(p -> p.getQuantity() == 0)
-                    .collect(Collectors.toList());
+                    .toList();
         }
 
         int startIndex = (int) pageable.getOffset();

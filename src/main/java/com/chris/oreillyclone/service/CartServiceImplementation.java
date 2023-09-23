@@ -53,16 +53,8 @@ public class CartServiceImplementation implements CartService{
     @Override
     public Cart findUserCart(Long userId) {
         Cart cart = cartRepository.findByUserId(userId);
-
-        double totalPrice = 0;
-        int totalItems = 0;
-
-        for(CartItem cartItem : cart.getCartItems()) {
-            totalPrice += cartItem.getPrice() * cartItem.getQuantity();
-            totalItems += cartItem.getQuantity();
-        }
-        cart.setTotalItems(totalItems);
-        cart.setTotalPrice(totalPrice);
+        cart.calculateTotalPrice();
+        cart.calculateTotalItems();
         return cartRepository.save(cart);
     }
 }

@@ -2,13 +2,16 @@ package com.chris.oreillyclone.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.proxy.HibernateProxy;
 
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address {
 
     @Id
@@ -37,36 +40,4 @@ public class Address {
     private User user;
 
     private String mobile;
-
-    public Address(long id, String firstName, String lastName, String streetAddress, String city, String state, String zipCode, User user, String mobile) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.streetAddress = streetAddress;
-        this.city = city;
-        this.state = state;
-        this.zipCode = zipCode;
-        this.user = user;
-        this.mobile = mobile;
-    }
-
-    public Address() {
-
-    }
-
-    @Override
-    public final boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
-        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
-        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
-        if (thisEffectiveClass != oEffectiveClass) return false;
-        Address address = (Address) o;
-        return false;
-    }
-
-    @Override
-    public final int hashCode() {
-        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
-    }
 }
