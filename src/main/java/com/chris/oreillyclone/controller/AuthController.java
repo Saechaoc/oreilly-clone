@@ -2,11 +2,14 @@ package com.chris.oreillyclone.controller;
 
 import com.chris.oreillyclone.config.JwtProvider;
 import com.chris.oreillyclone.exception.UserException;
+import com.chris.oreillyclone.model.Cart;
 import com.chris.oreillyclone.model.User;
 import com.chris.oreillyclone.repository.UserRepository;
 import com.chris.oreillyclone.request.LoginRequest;
 import com.chris.oreillyclone.response.AuthResponse;
+import com.chris.oreillyclone.service.CartService;
 import com.chris.oreillyclone.service.CustomerUserServiceImplementation;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,18 +38,13 @@ import java.util.Map;
 @Data
 @Getter
 @Setter
+@AllArgsConstructor
 public class AuthController {
     private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
     private final PasswordEncoder passwordEncoder;
     private final CustomerUserServiceImplementation customerUserService;
-    public AuthController(UserRepository userRepository, JwtProvider jwtProvider,
-                          PasswordEncoder passwordEncoder, CustomerUserServiceImplementation customerUserService) {
-        this.userRepository = userRepository;
-        this.jwtProvider = jwtProvider;
-        this.passwordEncoder = passwordEncoder;
-        this.customerUserService = customerUserService;
-    }
+    private final CartService cartService;
 
     @PostMapping(value = "/signup", produces = "application/json")
     public ResponseEntity<AuthResponse>createUserHandler(@RequestBody User user) throws UserException {
@@ -65,6 +63,8 @@ public class AuthController {
         createdUser.setFirstName(firstName);
         createdUser.setLastName(lastName);
         User savedUser = userRepository.save(createdUser);
+
+        Cart cart = cartService.createCart(savedUser);
 
         List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
         Authentication authentication = new UsernamePasswordAuthenticationToken(savedUser.getEmail(), savedUser.getPassword(), authorities);

@@ -8,6 +8,6 @@ import com.chris.oreillyclone.request.RatingRequest;
 import java.util.List;
 
 public interface RatingService {
-    public Rating createRating(RatingRequest req, User user) throws ProductException;
-    public List<Rating> getProduct(Long pid);
+    Rating createRating(RatingRequest req, User user) throws ProductException;
+    List<Rating> getProduct(Long pid);
 }
