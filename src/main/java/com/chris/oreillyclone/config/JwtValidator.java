@@ -1,6 +1,7 @@
 package com.chris.oreillyclone.config;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -18,7 +19,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.crypto.SecretKey;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 
 public class JwtValidator extends OncePerRequestFilter {
 
@@ -30,20 +35,25 @@ public class JwtValidator extends OncePerRequestFilter {
         if (jwt != null && jwt.startsWith("Bearer ")) {
             jwt=jwt.substring(7);
             try {
+                System.out.println(jwt);
                 //CONSIDER RENAMING TO SIGNING_KEY
                 SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
-                Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
+                Jws<Claims> jws = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt);
+                Claims claims = jws.getBody();
 
-                String email = (String) claims.get("email");
-                String authorities = (String) claims.get("authorities");
+                String email = claims.get("email", String.class);
+
+                String authorities = claims.get("authorities", String.class);
 
                 if (email == null || authorities == null) {
                     throw new BadCredentialsException("JWT claims are missing");
                 }
 
-                List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList(authorities);
-                Authentication authentication = new UsernamePasswordAuthenticationToken(email, null,auths);
+                List<GrantedAuthority> auths = Arrays.stream(authorities.split(","))
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
 
+                Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, auths);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }catch (JwtException e) {
                 //Create a logger class
