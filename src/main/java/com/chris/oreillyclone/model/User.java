@@ -45,4 +45,12 @@ public class User {
     private List<Review> reviewList = new ArrayList<>();
 
     private LocalDateTime createdAt;
+
+    public boolean isAdmin() {
+        return role.equals("ROLE_ADMIN");
+    }
+
+    public String getUsername() {
+        return email;
+    }
 }

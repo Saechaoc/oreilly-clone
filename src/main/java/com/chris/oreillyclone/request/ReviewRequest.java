@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RatingRequest {
+public class ReviewRequest {
     private Long pid;
-    private double rating;
+    private String review;
 }

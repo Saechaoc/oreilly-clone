@@ -54,6 +54,8 @@ public class Product {
     @JoinColumn(name="category_id")
     private Category category;
 
+    private String stock;
+
 //    @ManyToOne()
 //    @JoinColumn(name="subcategory_id")
 //    private Subcategory subcateogry;

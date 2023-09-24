@@ -1,6 +1,8 @@
 package com.chris.oreillyclone.repository;
 
 import com.chris.oreillyclone.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -31,6 +33,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "SELECT * FROM products WHERE price > ?1", nativeQuery = true)
     List<Product> findProductsAbovePrice(double price);
 
+    Page<Product> findByCategoryAndPriceBetweenAndStock (String category, double minPrice, double maxPrice, String stock, Pageable pageable);
     /**
      * Delete Methods
      */

@@ -2,7 +2,9 @@ package com.chris.oreillyclone.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -10,7 +12,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "rating")
+@Table
+@AllArgsConstructor
+@NoArgsConstructor
 public class Rating {
 
     @Id
@@ -31,15 +35,7 @@ public class Rating {
 
     private LocalDateTime createdAt;
 
-    public Rating() {
-
-    }
-
-    public Rating(Long id, User user, Product product, double rating, LocalDateTime createdAt) {
-        this.id = id;
-        this.user = user;
-        this.product = product;
-        this.rating = rating;
-        this.createdAt = createdAt;
+    public void setCreatedAt() {
+        this.setCreatedAt(LocalDateTime.now());
     }
 }

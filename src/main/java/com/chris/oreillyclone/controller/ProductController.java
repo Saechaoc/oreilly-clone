@@ -1,0 +1,56 @@
+package com.chris.oreillyclone.controller;
+
+import com.chris.oreillyclone.exception.ProductException;
+import com.chris.oreillyclone.model.Product;
+import com.chris.oreillyclone.repository.ProductRepository;
+import com.chris.oreillyclone.service.ProductService;
+import com.chris.oreillyclone.service.ProductServiceImplementation;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api")
+@NoArgsConstructor
+public class ProductController {
+    private ProductService productService;
+
+    @Autowired
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
+    @GetMapping("/products")
+    public ResponseEntity<Page<Product>> findProductsByCategoryHandler(@RequestParam String category, @RequestParam String subcategory,
+            @RequestParam double minPrice, @RequestParam double maxPrice, @RequestParam String sort,
+            @RequestParam String stock, @RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+
+        Page<Product> res = productService.getAllProducts(category,subcategory,minPrice,maxPrice,sort,stock,pageNumber,pageSize);
+        return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/products/id/{pid}")
+    public ResponseEntity<Product> findProductsByIdHandler(@PathVariable Long pid) throws ProductException {
+
+        Product product = productService.findProductById(pid);
+        return new ResponseEntity<>(product, HttpStatus.ACCEPTED);
+    }
+
+//    @GetMapping("/products/search")
+//    public ResponseEntity<List<Product>> searchProductHandler(@RequestParam String q) {
+//
+//        List<Product> products = productService.searchProduct(q);
+//
+//        return new ResponseEntity<>(products,HttpStatus.OK);
+//    }
+
+}
