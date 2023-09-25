@@ -7,9 +7,9 @@ import com.chris.oreillyclone.request.AddItemRequest;
 
 public interface CartService {
 
-    public Cart createCart(User user);
+    Cart createCart(User user);
 
-    public void addCartItem(Long userId, AddItemRequest req) throws ProductException;
+    void addCartItem(Long userId, AddItemRequest req) throws ProductException;
 
-    public Cart findUserCart(Long userId);
+    Cart findUserCart(Long userId);
 }

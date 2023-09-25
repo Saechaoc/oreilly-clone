@@ -1,4 +1,4 @@
-package com.chris.oreillyclone.request;
+package com.chris.oreillyclone.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,10 +7,9 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
-public class AddItemRequest {
-    private Long productId;
-    private int quantity;
-    private double price;
+@Getter
+public class ApiResponse {
+    private String message;
+    private boolean status;
 }

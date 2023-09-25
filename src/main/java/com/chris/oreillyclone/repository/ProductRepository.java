@@ -30,8 +30,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT P FROM Product P where P.price between ?1 and ?2")
     List<Product> findProductsByPriceRange(double minPrice, double maxPrice);
 
-    @Query(value = "SELECT * FROM products WHERE price > ?1", nativeQuery = true)
+    @Query("SELECT p FROM Product p WHERE p.price > ?1")
     List<Product> findProductsAbovePrice(double price);
+
+    @Query("SELECT p from Product p where p.title like ?1 or p.description like ?1 or p.productFamily like ?1 or p.productLine like ?1")
+    List<Product> searchProducts(String query);
 
     Page<Product> findByCategoryAndPriceBetweenAndStock (String category, double minPrice, double maxPrice, String stock, Pageable pageable);
     /**

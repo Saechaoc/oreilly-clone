@@ -18,8 +18,8 @@ import java.util.List;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long pid;
 
     @Column(name = "title")
     private String title;
@@ -50,15 +50,11 @@ public class Product {
     @Column(name = "num_ratings")
     private int numRatings;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name="category_id")
     private Category category;
 
     private String stock;
-
-//    @ManyToOne()
-//    @JoinColumn(name="subcategory_id")
-//    private Subcategory subcateogry;
 
     private LocalDateTime createdAt;
 }

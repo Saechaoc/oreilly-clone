@@ -9,17 +9,19 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface ProductService {
-    public Product createProduct(CreateProductRequest createProductRequest);
+    Product createProduct(CreateProductRequest createProductRequest);
 
-    public ResponseEntity<String> deleteProduct(Long pid) throws ProductException;
+    ResponseEntity<String> deleteProduct(Long pid) throws ProductException;
 
-    public Product updateProduct(Long pid, Product req) throws ProductException;
+    Product updateProduct(Long pid, Product req) throws ProductException;
 
-    public Product findProductById(Long pid) throws ProductException;
+    Product findProductById(Long pid) throws ProductException;
 
-    public List<Product> findProductByCategory(String category);
+    List<Product> findProductByCategory(String category);
 
-    public Page<Product> getAllProducts(String category, String subcategory, double minPrice, double maxPrice, String sort, String stock, Integer pageNumber, Integer pageSize);
+    Page<Product> getAllProducts(String category, String subcategory, double minPrice, double maxPrice, String sort, String stock, Integer pageNumber, Integer pageSize);
 
-    public List<Product> findProductsByPriceRange(double minPrice, double maxPrice);
+    List<Product> findProductsByPriceRange(double minPrice, double maxPrice);
+    List<Product> searchProducts(String query);
+
 }

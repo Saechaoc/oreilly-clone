@@ -7,10 +7,8 @@ import com.chris.oreillyclone.model.User;
 import com.chris.oreillyclone.repository.RatingRepository;
 import com.chris.oreillyclone.request.RatingRequest;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -34,7 +32,7 @@ public class RatingServiceImplementation implements RatingService{
     }
 
     @Override
-    public List<Rating> getProduct(Long pid) {
+    public List<Rating> getProductsRating(Long pid) {
          return ratingRepository.getAllProductRatings(pid);
     }
 }

@@ -6,6 +6,7 @@ import com.chris.oreillyclone.model.Product;
 import com.chris.oreillyclone.repository.CategoryRepository;
 import com.chris.oreillyclone.repository.ProductRepository;
 import com.chris.oreillyclone.request.CreateProductRequest;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -19,20 +20,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class ProductServiceImplementation implements ProductService {
     private final ProductRepository productRepository;
     private final UserService userService;
     private final CategoryRepository categoryRepository;
 
-    public ProductServiceImplementation(ProductRepository productRepository, UserService userService, CategoryRepository categoryRepository) {
-        this.productRepository = productRepository;
-        this.userService = userService;
-        this.categoryRepository = categoryRepository;
-    }
 
     /**
      * Possible candidate for Builder pattern
      */
+    @Transactional
     @Override
     public Product createProduct(CreateProductRequest req) {
 
@@ -146,5 +144,11 @@ public class ProductServiceImplementation implements ProductService {
     @Override
     public List<Product> findProductsByPriceRange(double minPrice, double maxPrice) {
         return productRepository.findProductsByPriceRange(minPrice,maxPrice);
+    }
+
+    @Override
+    public List<Product> searchProducts(String query) {
+        String wrappedQuery = "%" + query + "%";
+        return productRepository.searchProducts(wrappedQuery);
     }
 }

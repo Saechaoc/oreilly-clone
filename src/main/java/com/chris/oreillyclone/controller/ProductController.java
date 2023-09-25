@@ -2,16 +2,10 @@ package com.chris.oreillyclone.controller;
 
 import com.chris.oreillyclone.exception.ProductException;
 import com.chris.oreillyclone.model.Product;
-import com.chris.oreillyclone.repository.ProductRepository;
 import com.chris.oreillyclone.service.ProductService;
-import com.chris.oreillyclone.service.ProductServiceImplementation;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,12 +39,11 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.ACCEPTED);
     }
 
-//    @GetMapping("/products/search")
-//    public ResponseEntity<List<Product>> searchProductHandler(@RequestParam String q) {
-//
-//        List<Product> products = productService.searchProduct(q);
-//
-//        return new ResponseEntity<>(products,HttpStatus.OK);
-//    }
+    @GetMapping("/products/search")
+    public ResponseEntity<List<Product>> searchProductHandler(@RequestParam String query) {
+        List<Product> products = productService.searchProducts(query);
+
+        return new ResponseEntity<>(products,HttpStatus.OK);
+    }
 
 }

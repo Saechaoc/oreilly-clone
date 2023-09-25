@@ -3,13 +3,17 @@ package com.chris.oreillyclone.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "categories")
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,18 +23,9 @@ public class Category {
     @Size(max = 50)
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "parent_category_id")
     private Category parentCategory;
 
     private int level;
-
-    public Category() {}
-
-    public Category(Long id, String name, Category parentCategory, int level) {
-        this.id = id;
-        this.name = name;
-        this.parentCategory = parentCategory;
-        this.level = level;
-    }
 }

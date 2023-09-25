@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface RatingService {
     Rating createRating(RatingRequest req, User user) throws ProductException;
-    List<Rating> getProduct(Long pid);
+    List<Rating> getProductsRating(Long pid);
 }

@@ -1,6 +1,7 @@
 package com.chris.oreillyclone.controller;
 
 import com.chris.oreillyclone.config.JwtProvider;
+import com.chris.oreillyclone.config.Roles;
 import com.chris.oreillyclone.exception.UserException;
 import com.chris.oreillyclone.model.Cart;
 import com.chris.oreillyclone.model.User;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -62,6 +64,15 @@ public class AuthController {
         createdUser.setPassword(passwordEncoder.encode(password));
         createdUser.setFirstName(firstName);
         createdUser.setLastName(lastName);
+
+        if(user.getRole() == null) {
+            createdUser.setRole(Roles.USER);
+        }else {
+            createdUser.setRole(user.getRole());
+        }
+
+        createdUser.setCreatedAt(LocalDateTime.now());
+
         User savedUser = userRepository.save(createdUser);
 
         Cart cart = cartService.createCart(savedUser);
