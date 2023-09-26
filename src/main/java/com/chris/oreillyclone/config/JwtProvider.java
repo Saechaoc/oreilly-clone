@@ -5,11 +5,14 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,6 +52,19 @@ public class JwtProvider {
         Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
         return (String) claims.get("email");
     }
+
+    public List<SimpleGrantedAuthority> getAuthoritiesFromToken(String jwt) {
+        if (jwt.startsWith("Bearer ")) {
+            jwt = jwt.substring(7);
+        }
+
+        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
+        String authoritiesString = (String) claims.get("authorities");
+        return Arrays.stream(authoritiesString.split(","))
+                .map(SimpleGrantedAuthority::new)
+                .toList();
+    }
+
 
 }
 

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/products")
 @NoArgsConstructor
 public class ProductController {
     private ProductService productService;
@@ -23,7 +23,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/products")
+    @GetMapping("/")
     public ResponseEntity<Page<Product>> findProductsByCategoryHandler(@RequestParam String category, @RequestParam String subcategory,
             @RequestParam double minPrice, @RequestParam double maxPrice, @RequestParam String sort,
             @RequestParam String stock, @RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
@@ -32,14 +32,14 @@ public class ProductController {
         return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/products/id/{pid}")
+    @GetMapping("/id/{pid}")
     public ResponseEntity<Product> findProductsByIdHandler(@PathVariable Long pid) throws ProductException {
 
         Product product = productService.findProductById(pid);
         return new ResponseEntity<>(product, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/products/search")
+    @GetMapping("/search")
     public ResponseEntity<List<Product>> searchProductHandler(@RequestParam String query) {
         List<Product> products = productService.searchProducts(query);
 

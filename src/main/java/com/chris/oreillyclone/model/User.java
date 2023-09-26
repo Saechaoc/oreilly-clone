@@ -1,6 +1,7 @@
 package com.chris.oreillyclone.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,10 +38,12 @@ public class User {
     @CollectionTable(name = "payment_information", joinColumns = @JoinColumn(name = "user_id"))
     private List<PaymentInformation> paymentInformationList = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Rating> ratingList = new ArrayList<>();
 
     @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Review> reviewList = new ArrayList<>();
 

@@ -65,10 +65,10 @@ public class AuthController {
         createdUser.setFirstName(firstName);
         createdUser.setLastName(lastName);
 
-        if(user.getRole() == null) {
+        if(user.getRole() == null || user.getRole().equals(Roles.USER)) {
             createdUser.setRole(Roles.USER);
         }else {
-            createdUser.setRole(user.getRole());
+            createdUser.setRole(Roles.ADMIN);
         }
 
         createdUser.setCreatedAt(LocalDateTime.now());
