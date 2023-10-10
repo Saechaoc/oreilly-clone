@@ -17,7 +17,6 @@ This project is structured into several layers, ensuring a clean architecture an
 
 ```mermaid
 graph TB
-
     ViewLayer[View Layer]
     ApplicationLayer[Application Layer]
     ShoppingAPI[ShoppingAPI]
