@@ -31,7 +31,8 @@ public class JwtValidator extends OncePerRequestFilter {
         //Consider renaming to AUTHORIZATION_HEADER
         String jwt = request.getHeader(JwtConstant.JWT_HEADER);
 
-        if (jwt.startsWith("Bearer ")) {
+        System.out.println(request);
+        if (jwt != null && jwt.startsWith("Bearer ")) {
             jwt=jwt.substring(7);
             try {
                 //CONSIDER RENAMING TO SIGNING_KEY
