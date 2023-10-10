@@ -31,7 +31,7 @@ public class AppConfig {
                                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                         )
                 .authorizeHttpRequests(authorize->
-                        authorize.requestMatchers("/auth/signup","/","index","/api/products/").permitAll()
+                        authorize.requestMatchers("/auth/signup","/","index","/api/products/**").permitAll()
                                 .requestMatchers("/api/**").authenticated()
                                 .anyRequest().permitAll()
                 )
