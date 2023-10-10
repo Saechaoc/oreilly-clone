@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Setter
 @Embeddable
 public class PaymentInformation {
+
     @Column(name="cardholder_name")
     private String cardholderName;
 
@@ -20,4 +21,6 @@ public class PaymentInformation {
     private LocalDate expirationDate;
     @Column(name="cvv")
     private String cvv;
+
+
 }

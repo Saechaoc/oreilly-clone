@@ -21,4 +21,5 @@ public class CreateProductRequest {
 
     private String productLine;
     private String productFamily;
+    private String partNumber;
 }

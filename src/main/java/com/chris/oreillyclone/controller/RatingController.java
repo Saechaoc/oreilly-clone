@@ -32,6 +32,14 @@ public class RatingController {
 
         return new ResponseEntity<>(rating, HttpStatus.CREATED);
     }
+    // TODO
+//    @PostMapping("/update")
+//    public ResponseEntity<Rating> updateRating(@RequestBody RatingRequest req, @RequestHeader("Authorization") String jwt) throws UserException, ProductException {
+//        User user = userService.findUserByJWT(jwt);
+//        Rating rating = ratingService.updateRating(req, user);
+//
+//        return new ResponseEntity<>(rating, HttpStatus.CREATED);
+//    }
 
     @GetMapping("/product/{pid}")
     public ResponseEntity<List<Rating>> getProductsRating(@PathVariable Long pid, @RequestHeader("Authorization") String jwt) throws UserException, ProductException {

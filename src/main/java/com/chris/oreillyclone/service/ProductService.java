@@ -19,9 +19,10 @@ public interface ProductService {
 
     List<Product> findProductByCategory(String category);
 
-    Page<Product> getAllProducts(String category, String subcategory, double minPrice, double maxPrice, String sort, String stock, Integer pageNumber, Integer pageSize);
+    Page<Product> getAllProducts(String category, double minPrice, double maxPrice, String sort, String stock, Integer pageNumber, Integer pageSize);
 
     List<Product> findProductsByPriceRange(double minPrice, double maxPrice);
     List<Product> searchProducts(String query);
 
+    List<Product> findAllProducts() throws ProductException;
 }

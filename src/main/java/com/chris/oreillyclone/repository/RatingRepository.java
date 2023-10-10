@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface RatingRepository extends JpaRepository<Rating,Long> {
 
-    @Query("SELECT r from Rating r where r.id = ?1")
-    public List<Rating> getAllProductRatings(Long pid);
+    @Query("SELECT r from Rating r where r.product.pid = ?1")
+    List<Rating> getAllProductRatings(Long pid);
 }

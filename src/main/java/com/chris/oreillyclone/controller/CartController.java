@@ -9,6 +9,8 @@ import com.chris.oreillyclone.response.ApiResponse;
 import com.chris.oreillyclone.service.CartService;
 import com.chris.oreillyclone.service.UserService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,9 @@ public class CartController {
 
     @Autowired
     private final UserService userService;
+    private static final Logger logger = LoggerFactory.getLogger(CartController.class);
+
+
 
     @GetMapping("/")
     @ManagedOperation(description = "find cart by user id")
@@ -43,7 +48,10 @@ public class CartController {
         ApiResponse res = new ApiResponse();
         res.setMessage("Item added to cart");
         res.setStatus(true);
-
+//        logger.info("Request Data");
+//        logger.info(String.valueOf(req.getPid()));
+//        logger.info(String.valueOf(req.getQuantity()));
+//        logger.info(String.valueOf(req.getPrice()));
         return new ResponseEntity<>(res,HttpStatus.OK);
     }
 

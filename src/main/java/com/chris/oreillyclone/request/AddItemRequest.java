@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AddItemRequest {
-    private Long productId;
+    private Long pid;
     private int quantity;
     private double price;
 }

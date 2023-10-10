@@ -35,4 +35,5 @@ public class RatingServiceImplementation implements RatingService{
     public List<Rating> getProductsRating(Long pid) {
          return ratingRepository.getAllProductRatings(pid);
     }
+
 }

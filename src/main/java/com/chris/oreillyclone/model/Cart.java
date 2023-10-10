@@ -38,7 +38,7 @@ public class Cart {
     public void calculateTotalPrice() {
         double sumPrice = 0;
         for(CartItem cartItem : this.cartItems) {
-            sumPrice += cartItem.getPrice() * cartItem.getQuantity();
+            sumPrice += cartItem.getPrice();
         }
         setTotalPrice(sumPrice);
     }

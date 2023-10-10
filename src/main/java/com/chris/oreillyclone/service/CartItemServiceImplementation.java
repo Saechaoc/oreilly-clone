@@ -8,6 +8,8 @@ import com.chris.oreillyclone.model.Product;
 import com.chris.oreillyclone.model.User;
 import com.chris.oreillyclone.repository.CartItemRepository;
 import com.chris.oreillyclone.repository.CartRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +19,8 @@ public class CartItemServiceImplementation implements CartItemService {
     private final CartItemRepository cartItemRepository;
     private final UserService userService;
 
+    private static final Logger logger = LoggerFactory.getLogger(CartItemServiceImplementation.class);
+
     public CartItemServiceImplementation(CartRepository cartRepository, CartItemRepository cartItemRepository, UserService userService) {
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
@@ -25,8 +29,6 @@ public class CartItemServiceImplementation implements CartItemService {
 
     @Override
     public CartItem createCartItem(CartItem cartItem) {
-        cartItem.setQuantity(1);
-        cartItem.setPrice(cartItem.getPrice()*cartItem.getQuantity());
         return cartItemRepository.save(cartItem);
     }
 
@@ -36,11 +38,31 @@ public class CartItemServiceImplementation implements CartItemService {
         User user = userService.findUserById(item.getUserId());
 
         if(user.getId().equals(userId)) {
+//            logger.info("Cart Item : " + String.valueOf(item));
             item.setQuantity(cartItem.getQuantity());
             item.setPrice(cartItem.getQuantity() * cartItem.getProduct().getPrice());
         }
         return cartItemRepository.save(item);
     }
+
+//    @Override
+//    public Cart updateCartItem(Long userId, Long pid, CartItem cartItem) throws CartItemException, UserException {
+//        CartItem item = findCartItemById(pid);
+//        User user = userService.findUserById(item.getUserId());
+//
+//        if(user.getId().equals(userId)) {
+//            item.setQuantity(cartItem.getQuantity());
+//            item.setPrice(cartItem.getQuantity() * cartItem.getProduct().getPrice());
+//        }
+//        cartItemRepository.save(item);
+//
+//        // Fetch the entire cart and return it
+//        Cart cart = cartRepository.findByUserId(userId);
+//        cart.calculateTotalPrice();
+//        cart.calculateTotalItems();
+//        return cartRepository.save(cart);
+//    }
+
 
     @Override
     public CartItem isCartItemSet(Cart cart, Product product, Long userId) {

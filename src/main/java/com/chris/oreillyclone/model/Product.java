@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,35 @@ public class Product {
     @JoinColumn(name="category_id")
     private Category category;
 
+    @Column(name = "brand")
+    private String brand;
+
     private String stock;
+    private String partNumber;
 
     private LocalDateTime createdAt;
+
+    public void setStock() {
+        if (this.quantity > 0) {
+            this.setStock("in_stock");
+        } else {
+            this.setStock(("out_of_stock"));
+        }
+    }
+
+    public void setPartNumber() {
+        String firstLetter = this.getProductFamily();
+        String secondLetter = this.getProductLine();
+
+        char firstLetterFamily = Character.toUpperCase(firstLetter.charAt(0));
+        char firstLetterLine = Character.toUpperCase(secondLetter.charAt(0));
+
+        String newPartNumber = String.valueOf(firstLetterFamily) + firstLetterLine;
+
+        int timestamp = (int) Instant.now().toEpochMilli()/10000;
+
+        newPartNumber += timestamp;
+
+        this.setPartNumber(newPartNumber);
+    }
 }

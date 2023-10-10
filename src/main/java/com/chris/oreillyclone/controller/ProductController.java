@@ -23,16 +23,16 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/")
-    public ResponseEntity<Page<Product>> findProductsByCategoryHandler(@RequestParam String category, @RequestParam String subcategory,
+    @GetMapping()
+    public ResponseEntity<Page<Product>> findProductsByCategoryHandler(@RequestParam String category,
             @RequestParam double minPrice, @RequestParam double maxPrice, @RequestParam String sort,
             @RequestParam String stock, @RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
 
-        Page<Product> res = productService.getAllProducts(category,subcategory,minPrice,maxPrice,sort,stock,pageNumber,pageSize);
+        Page<Product> res = productService.getAllProducts(category,minPrice,maxPrice,sort,stock,pageNumber,pageSize);
         return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/id/{pid}")
+    @GetMapping("/{pid}")
     public ResponseEntity<Product> findProductsByIdHandler(@PathVariable Long pid) throws ProductException {
 
         Product product = productService.findProductById(pid);
@@ -46,4 +46,9 @@ public class ProductController {
         return new ResponseEntity<>(products,HttpStatus.OK);
     }
 
+    @GetMapping("/")
+    public ResponseEntity<List<Product>> findAllProducts() throws ProductException {
+        List<Product> products = productService.findAllProducts();
+        return new ResponseEntity<>(products, HttpStatus.ACCEPTED);
+    }
 }

@@ -19,6 +19,5 @@ public class PaymentDetails {
     private String paymentId;
     private LocalDateTime paymentDate;
     private double amountPaid;
-
-
+    private PaymentInformation paymentInformation;
 }

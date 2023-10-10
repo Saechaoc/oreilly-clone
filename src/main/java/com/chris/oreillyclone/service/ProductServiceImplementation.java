@@ -47,6 +47,11 @@ public class ProductServiceImplementation implements ProductService {
         product.setProductLine(req.getProductLine());
         product.setProductFamily(req.getProductFamily());
         product.setCategory(thirdLevel);
+        product.setQuantity(req.getQuantity());
+        product.setStock();
+        product.setPartNumber();
+        product.setBrand(req.getBrand());
+
         product.setCreatedAt(LocalDateTime.now());
 
         return productRepository.save(product);
@@ -115,7 +120,7 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     @Override
-    public Page<Product> getAllProducts(String category, String subcategory, double minPrice, double maxPrice, String sort, String stock, Integer pageNumber, Integer pageSize) {
+    public Page<Product> getAllProducts(String category, double minPrice, double maxPrice, String sort, String stock, Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber,pageSize);
         List<Product> products = productRepository.filterProduct(category, minPrice,maxPrice,sort);
 
@@ -150,5 +155,10 @@ public class ProductServiceImplementation implements ProductService {
     public List<Product> searchProducts(String query) {
         String wrappedQuery = "%" + query + "%";
         return productRepository.searchProducts(wrappedQuery);
+    }
+
+    @Override
+    public List<Product> findAllProducts() throws ProductException {
+        return productRepository.findAllProducts();
     }
 }

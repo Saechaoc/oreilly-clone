@@ -10,6 +10,7 @@ import com.chris.oreillyclone.request.LoginRequest;
 import com.chris.oreillyclone.response.AuthResponse;
 import com.chris.oreillyclone.service.CartService;
 import com.chris.oreillyclone.service.CustomerUserServiceImplementation;
+import com.chris.oreillyclone.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -30,10 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -47,6 +45,7 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final CustomerUserServiceImplementation customerUserService;
     private final CartService cartService;
+    private final UserService userService;
 
     @PostMapping(value = "/signup", produces = "application/json")
     public ResponseEntity<AuthResponse>createUserHandler(@RequestBody User user) throws UserException {
@@ -89,11 +88,11 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<AuthResponse>loginUserHandler(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<AuthResponse>loginUserHandler(@RequestBody LoginRequest loginRequest) throws UserException{
         String email = loginRequest.getEmail();
         String password = loginRequest.getPassword();
 
-        Authentication authentication = authenticate(email, password);
+        Authentication authentication = authenticate(email,password);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtProvider.generateToken(authentication);
@@ -102,15 +101,17 @@ public class AuthController {
         return new ResponseEntity<>(authResponse,HttpStatus.ACCEPTED);
     }
 
-    private Authentication authenticate(String username, String password) {
+    private Authentication authenticate(String username, String password) throws UserException {
         UserDetails userDetails = customerUserService.loadUserByUsername(username);
-
+        User user = userService.findUserByEmail(username);
         if(userDetails == null) throw new BadCredentialsException("Invalid username");
 
         if(!passwordEncoder.matches(password,userDetails.getPassword())) {
             throw new BadCredentialsException("Invalid password");
         }
-        return new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+        String role = user.getRole();
+        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(role));
+        return new UsernamePasswordAuthenticationToken(username,password,authorities);
     }
 
     @PostMapping("/test")

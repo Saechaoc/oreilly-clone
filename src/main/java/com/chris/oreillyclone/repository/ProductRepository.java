@@ -32,9 +32,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("SELECT p FROM Product p WHERE p.price > ?1")
     List<Product> findProductsAbovePrice(double price);
-
     @Query("SELECT p from Product p where p.title like ?1 or p.description like ?1 or p.productFamily like ?1 or p.productLine like ?1")
     List<Product> searchProducts(String query);
+
+    @Query("SELECT p from Product p")
+    List<Product> findAllProducts();
+
+
 
     Page<Product> findByCategoryAndPriceBetweenAndStock (String category, double minPrice, double maxPrice, String stock, Pageable pageable);
     /**
