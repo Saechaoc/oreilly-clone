@@ -31,7 +31,7 @@ public class AppConfig {
                                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                         )
                 .authorizeHttpRequests(authorize->
-                        authorize.requestMatchers("/api/**").permitAll().anyRequest().permitAll()
+                        authorize.requestMatchers("/api/**").authenticated()
                                 .requestMatchers("/auth/signup","/","index").permitAll()
                                 .anyRequest().permitAll()
                 )
@@ -46,7 +46,7 @@ public class AppConfig {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration().applyPermitDefaultValues();
-        List<String> allowOrigins = Arrays.asList("http://localhost:3000", "http://localhost:4200", "http://localhost:8000","https://o-reilly-2-0.vercel.app");
+        List<String> allowOrigins = Arrays.asList("http://localhost","https://o-reilly-2-0.vercel.app");
         config.setAllowedOrigins(allowOrigins);
         config.setAllowedMethods(Collections.singletonList("*"));
         config.setAllowedHeaders(Collections.singletonList("*"));
