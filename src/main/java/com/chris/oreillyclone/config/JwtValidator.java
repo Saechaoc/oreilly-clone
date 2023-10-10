@@ -13,7 +13,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 
 public class JwtValidator extends OncePerRequestFilter {
@@ -32,10 +31,9 @@ public class JwtValidator extends OncePerRequestFilter {
         //Consider renaming to AUTHORIZATION_HEADER
         String jwt = request.getHeader(JwtConstant.JWT_HEADER);
 
-        if (jwt != null && jwt.startsWith("Bearer ")) {
+        if (jwt.startsWith("Bearer ")) {
             jwt=jwt.substring(7);
             try {
-                System.out.println(jwt);
                 //CONSIDER RENAMING TO SIGNING_KEY
                 SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
                 Jws<Claims> jws = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt);
