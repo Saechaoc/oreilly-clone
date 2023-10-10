@@ -32,7 +32,7 @@ public class AppConfig {
                         )
                 .authorizeHttpRequests(authorize->
                         authorize.requestMatchers("/api/**").authenticated()
-                                .requestMatchers("/auth/signup","/","index").permitAll()
+                                .requestMatchers("/auth/signup","/","index","/api/products/").permitAll()
                                 .anyRequest().permitAll()
                 )
                 .addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class)
