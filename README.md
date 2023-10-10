@@ -34,6 +34,14 @@ graph TB
     DataAccessObject -->|CRUD Operations| database
     ApplicationLayer -->|Utilize Auth| Auth
     ShoppingAPI -->|Utilize Auth| Auth
+
+    style ViewLayer fill:#000000,stroke:#333,stroke-width:2px
+    style ApplicationLayer fill:#000000,stroke:#333,stroke-width:2px
+    style ShoppingAPI fill:#000000,stroke:#333,stroke-width:2px
+    style DataAccessObject fill:#000000,stroke:#333,stroke-width:2px
+    style model fill:#000000,stroke:#333,stroke-width:2px
+    style database fill:#000000,stroke:#333,stroke-width:2px
+    style Auth fill:#000000,stroke:#333,stroke-width:2px
 ```
 
 
