@@ -46,9 +46,6 @@ tasks.named('test') {
 
 jar {
     manifest {
-        attributes(
-                'Class-Path': configurations.runtimeClasspath.files.collect { it.getName() }.join(' '),
-                'Main-Class': 'main.OreillyCloneApplication'
-        )
+        attributes 'Main-Class': 'com.chris.oreillyclone.OreillyCloneApplication'
     }
 }
